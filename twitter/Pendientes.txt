@@ -1,0 +1,29 @@
+PONER RUTAS FINALES EN GOOGLE
+
+"https://console.cloud.google.com/apis/credentials/oauthclient/285186085169-1gsak2212rblu7i4hmiiaa3j8aodmi3r.apps.googleusercontent.com?hl=es-419&inv=1&invt=AbohXA&project=buensabor-418717"
+
+Ver tema de login con google client
+
+POST MVP
+
+[] Colocar carteles de explicacion de datos > import HelpOutlineIcon from '@mui/icons-material/HelpOutline';
+[]Notificaciones
+[]Chat de soporte
+[]Más métodos de pagos
+[]Envíos y gestión de envíos
+[]Panel de control de ventas y KPIs: Un dashboard con estadísticas avanzadas, mostrando ventas, margen de ganancia, productos más y menos vendidos, y el rendimiento de cada sucursal. 
+[]Automatización de inventario y reabastecimiento: Configuración para alertas de inventario bajo y sugerencias de reabastecimiento automáticas para productos en tendencia.
+[]Marketing por email y SMS: Permitir envíos de campañas promocionales a clientes frecuentes, ofertas de descuento o recordatorios de carrito abandonado.
+[]Gestión de proveedores: Una sección para registrar proveedores, gestionar precios y realizar pedidos de compra directamente desde la plataforma.
+[]Generación automática de facturas y contabilidad básica: Ayuda al emprendedor a llevar la contabilidad generando facturas electrónicas y organizando los registros de ventas y gastos en un formato contable básico.
+[]Sistema de fidelización de clientes: Implementa un programa de puntos o recompensas para clientes recurrentes.
+[]Módulo de gastos generales y utilidades: Agregar un sistema para registrar otros gastos (como servicios, alquiler, etc.)
+[]CRM para seguimiento de clientes: Permitir el seguimiento de interacciones con los clientes, historial de compras y personalización de ofertas según sus preferencias. 
+[]Catálogo de productos personalizado para clientes frecuentes: Para clientes que hacen compras recurrentes (por ejemplo, empresas o negocios), permitir la creación de un catálogo personalizado, mostrando solo los productos que suelen comprar y agilizando el proceso.
+[]Aplicación móvil para gestión rápida: Un app móvil para que el emprendedor o sus empleados puedan ver ventas, gestionar pedidos y monitorear el stock sobre la marcha.
+[]Crear sistema de costos de envíos mediante Código postales | Oca o andreani
+[]Cobro mediante código de barra
+[]Cacheo con Redis de productos más buscados, etc para reducir tiempo y carga en la db
+[]Costos fijos para calculo de estadisticas mensuales (sueldos, alquileres, etc) siendo estos no afectados por las ventas ni asociados a ningun producto
+[]CTR historicos para ver bien impresiones y clicks en cierto tiempo
+[] Zod para validaciones
