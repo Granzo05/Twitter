@@ -1,6 +1,6 @@
 import { Post } from "@/types/Post";
-import { Box, Typography, Button, Avatar, CircularProgress } from "@mui/material";
-import { useEffect } from "react";
+import { Box, Typography, Button, Avatar } from "@mui/material";
+import { useEffect, useRef } from "react";
 import { useState } from "react";
 import Tweet from "./Tweet";
 import PublicIcon from '@mui/icons-material/Public';
@@ -15,17 +15,31 @@ import ChecklistRtlRoundedIcon from '@mui/icons-material/ChecklistRtlRounded';
 import EmojiEmotionsRoundedIcon from '@mui/icons-material/EmojiEmotionsRounded';
 import CalendarMonthRoundedIcon from '@mui/icons-material/CalendarMonthRounded';
 import RoomOutlinedIcon from '@mui/icons-material/RoomOutlined';
-import AddCircleOutlineOutlinedIcon from '@mui/icons-material/AddCircleOutlineOutlined';
 import CircularProgressWithLabel from "./CircularProgressWithLabel";
+import { User } from "@/types/User";
+import { COLOR_TWITTER_BLUE } from "@/utils/Const";
 
 const ListOfTweets = () => {
-    const [tweets, setTweets] = useState<Post[]>([]);
+    const [tweets, setTweets] = useState<Post[]>([
+        new Post(1, 'For you', null, 'Hello, world!', 0, new User(1, 'John Doe', 'john_doe', 'john@example.com', 'password', 'https://example.com/avatar.jpg', new Date()), new Date(2025, 5, 20), 'This is a test post.', [], 0, 0, 0, 0),
+        new Post(2, 'Following', null, 'Hello, world!', 0, new User(1, 'John Doe', 'john_doe', 'john@example.com', 'password', 'https://example.com/avatar.jpg', new Date()), new Date(2025, 5, 21), 'This is a test post.', [], 0, 0, 0, 0),
+        new Post(2, 'Following', null, 'Hello, world!', 0, new User(1, 'John Doe', 'john_doe', 'john@example.com', 'password', 'https://example.com/avatar.jpg', new Date()), new Date(2025, 5, 21), 'This is a test post.', [], 0, 0, 0, 0),
+        new Post(2, 'Following', null, 'Hello, world!', 0, new User(1, 'John Doe', 'john_doe', 'john@example.com', 'password', 'https://example.com/avatar.jpg', new Date()), new Date(2025, 5, 21), 'This is a test post.', [], 0, 0, 0, 0),
+        new Post(2, 'Following', null, 'Hello, world!', 0, new User(1, 'John Doe', 'john_doe', 'john@example.com', 'password', 'https://example.com/avatar.jpg', new Date()), new Date(2025, 5, 21), 'This is a test post.', [], 0, 0, 0, 0),
+        new Post(2, 'Following', null, 'Hello, world!', 0, new User(1, 'John Doe', 'john_doe', 'john@example.com', 'password', 'https://example.com/avatar.jpg', new Date()), new Date(2025, 5, 21), 'This is a test post.', [], 0, 0, 0, 0),
+        new Post(2, 'Following', null, 'Hello, world!', 0, new User(1, 'John Doe', 'john_doe', 'john@example.com', 'password', 'https://example.com/avatar.jpg', new Date()), new Date(2025, 5, 21), 'This is a test post.', [], 0, 0, 0, 0),
+        new Post(2, 'Following', null, 'Hello, world!', 0, new User(1, 'John Doe', 'john_doe', 'john@example.com', 'password', 'https://example.com/avatar.jpg', new Date()), new Date(2025, 5, 21), 'This is a test post.', [], 0, 0, 0, 0),
+        new Post(2, 'Following', null, 'Hello, world!', 0, new User(1, 'John Doe', 'john_doe', 'john@example.com', 'password', 'https://example.com/avatar.jpg', new Date()), new Date(2025, 5, 21), 'This is a test post.', [], 0, 0, 0, 0),
+        new Post(2, 'Following', null, 'Hello, world!', 0, new User(1, 'John Doe', 'john_doe', 'john@example.com', 'password', 'https://example.com/avatar.jpg', new Date()), new Date(2025, 5, 21), 'This is a test post.', [], 0, 0, 0, 0),
+        new Post(2, 'Following', null, 'Hello, world!', 0, new User(1, 'John Doe', 'john_doe', 'john@example.com', 'password', 'https://example.com/avatar.jpg', new Date()), new Date(2025, 5, 21), 'This is a test post.', [], 0, 0, 0, 0),
+    ]);
     const [selectedTab, setSelectedTab] = useState<'for-you' | 'following'>('for-you');
     const [showWhoCanReply, setShowWhoCanReply] = useState(false);
     const [replyOptionSelected, setReplyOptionSelected] = useState('Everyone can reply');
     const [showSelectorReply, setShowSelectorReply] = useState(false);
     const [tweetContent, setTweetContent] = useState('');
     const [isPosting, setIsPosting] = useState(false);
+
 
     useEffect(() => {
         const fetchTweets = async () => {
@@ -39,9 +53,27 @@ const ListOfTweets = () => {
                 setTweets(data);
             }
         };
-
-        fetchTweets();
+        //fetchTweets();
     }, [selectedTab]);
+
+    const handlePost = async () => {
+        setIsPosting(true);
+
+        try {
+            const response = await fetch('/api/tweets', {
+                method: 'POST',
+                body: JSON.stringify({ content: tweetContent })
+            });
+
+            if (response.ok) {
+                setTweetContent('');
+            }
+        } catch (e: any) {
+            console.log(e);
+        } finally {
+            setIsPosting(false);
+        }
+    }
 
     const handleReplyOptionSelected = (option: string) => {
         setReplyOptionSelected(option);
@@ -56,7 +88,7 @@ const ListOfTweets = () => {
         }} />,
         icon2: <CheckIcon sx={{
             fontSize: '20px', borderRadius: '999px', padding: '8px',
-            height: '25px', width: '25px', backgroundColor: '#1DA1F2'
+            height: '25px', width: '25px', backgroundColor: COLOR_TWITTER_BLUE
         }} />
     }
 
@@ -68,7 +100,7 @@ const ListOfTweets = () => {
         }} />,
         icon2: <CheckIcon sx={{
             fontSize: '20px', borderRadius: '999px', padding: '8px',
-            height: '25px', width: '25px', backgroundColor: '#1DA1F2'
+            height: '25px', width: '25px', backgroundColor: COLOR_TWITTER_BLUE
         }} />
     }
 
@@ -80,7 +112,7 @@ const ListOfTweets = () => {
         }} />,
         icon2: <CheckIcon sx={{
             fontSize: '20px', borderRadius: '999px', padding: '8px',
-            height: '25px', width: '25px', backgroundColor: '#1DA1F2'
+            height: '25px', width: '25px', backgroundColor: COLOR_TWITTER_BLUE
         }} />
     }
 
@@ -93,15 +125,15 @@ const ListOfTweets = () => {
         }} />,
         icon2: <AlternateEmailIcon sx={{
             fontSize: '20px', borderRadius: '999px', padding: '8px',
-            height: '25px', width: '25px', backgroundColor: '#1DA1F2'
+            height: '25px', width: '25px', backgroundColor: COLOR_TWITTER_BLUE
         }} />
     }
 
     const options = [Option1, Option2, Option3, Option4];
 
     return (
-        <Box sx={{ borderLeft: '1px solid rgb(59, 59, 59)', borderRight: '1px solid rgb(59, 59, 59)', width: '650px', height: '100%' }} >
-            <Box sx={{ display: 'flex', flexDirection: 'row', height: '50px', borderRadius: '0px' }}>
+        <Box sx={{ maxWidth: '650px', height: '100%', width: '100%' }} >
+            <Box sx={{ display: 'flex', flexDirection: 'row', height: '50px', borderRadius: '0px' }} borderLeft={'1px solid rgb(59, 59, 59)'} borderRight={'1px solid rgb(59, 59, 59)'}>
                 <Button onClick={() => setSelectedTab('for-you')} variant="contained" fullWidth sx={{ backgroundColor: 'black', color: 'white', '&:hover': { backgroundColor: '#171717' }, padding: '15px', borderRadius: '0px', borderBottom: '1px solid rgb(117, 117, 117)' }}>
                     <Typography variant="body2" sx={{ borderBottom: selectedTab === 'for-you' ? '5px solid #1DA1F2' : 'none', height: '30px', paddingTop: '15px', color: selectedTab === 'for-you' ? 'white' : 'gray' }}>
                         For you
@@ -114,8 +146,8 @@ const ListOfTweets = () => {
                 </Button>
             </Box>
 
-            <Box sx={{ display: 'flex', flexDirection: 'row', overflow: 'hidden' }}>
-                <Avatar sx={{ width: '50px', height: '50px', margin: '10px' }} />
+            <Box sx={{ display: 'flex', flexDirection: 'row', overflow: 'hidden' }} borderLeft={'1px solid rgb(59, 59, 59)'} borderRight={'1px solid rgb(59, 59, 59)'} borderBottom={'2px solid rgb(54, 54, 54)'}>
+                <Avatar sx={{ width: '50px', height: '50px', margin: '10px', ':hover': { boxShadow: 'inset 0 0 20px rgba(73, 73, 73, 0.5)' }, cursor: 'pointer' }} />
                 <Box sx={{ display: 'flex', flexDirection: 'column', width: '100%' }}>
                     <Box sx={{ display: 'flex', flexDirection: 'column' }}>
                         <textarea
@@ -130,6 +162,8 @@ const ListOfTweets = () => {
                                 outline: 'none',
                                 overflow: 'hidden',
                                 resize: 'none',
+                                paddingTop: '25px',
+                                paddingBottom: '25px',
                             }}
                             rows={Math.max(Math.ceil(tweetContent.length / 52), 1)}
                             onFocus={() => setShowWhoCanReply(true)}
@@ -157,7 +191,7 @@ const ListOfTweets = () => {
                                     if (option.name === replyOptionSelected) {
                                         return (
                                             <Typography variant="body2" onClick={() => setShowSelectorReply(true)} sx={{
-                                                display: 'flex', flexDirection: 'row', alignItems: 'center', color: '#1DA1F2', cursor: 'pointer', textWrap: 'nowrap'
+                                                display: 'flex', flexDirection: 'row', alignItems: 'center', color: COLOR_TWITTER_BLUE, cursor: 'pointer', textWrap: 'nowrap'
                                             }}>
                                                 {option.icon1}
                                                 {option.name}
@@ -200,20 +234,20 @@ const ListOfTweets = () => {
                     </Box>
 
                     <Box sx={{ display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', mb: 1 }}>
-                        <Box display={'flex'} flexDirection={'row'} gap={'10px'}>
-                            <ImageOutlinedIcon sx={{ fontSize: '24px', color: '#1DA1F2' }} />
-                            <GifBoxOutlinedIcon sx={{ fontSize: '24px', color: '#1DA1F2' }} />
-                            <TravelExploreIcon sx={{ fontSize: '24px', color: '#1DA1F2' }} />
-                            <ChecklistRtlRoundedIcon sx={{ fontSize: '24px', color: '#1DA1F2' }} />
-                            <EmojiEmotionsRoundedIcon sx={{ fontSize: '24px', color: '#1DA1F2' }} />
-                            <CalendarMonthRoundedIcon sx={{ fontSize: '24px', color: '#1DA1F2' }} />
-                            <RoomOutlinedIcon sx={{ fontSize: '24px', color: '#115b88' }} />
+                        <Box display={'flex'} flexDirection={'row'} gap={'15px'}>
+                            <ImageOutlinedIcon sx={{ fontSize: '24px', color: COLOR_TWITTER_BLUE, cursor: 'pointer' }} />
+                            <GifBoxOutlinedIcon sx={{ fontSize: '24px', color: COLOR_TWITTER_BLUE, cursor: 'pointer' }} />
+                            <TravelExploreIcon sx={{ fontSize: '24px', color: COLOR_TWITTER_BLUE, cursor: 'pointer' }} />
+                            <ChecklistRtlRoundedIcon sx={{ fontSize: '24px', color: COLOR_TWITTER_BLUE, cursor: 'pointer' }} />
+                            <EmojiEmotionsRoundedIcon sx={{ fontSize: '24px', color: COLOR_TWITTER_BLUE, cursor: 'pointer' }} />
+                            <CalendarMonthRoundedIcon sx={{ fontSize: '24px', color: COLOR_TWITTER_BLUE, cursor: 'pointer' }} />
+                            <RoomOutlinedIcon sx={{ fontSize: '24px', color: '#115b88', cursor: 'pointer' }} />
                         </Box>
 
                         <Box sx={{ display: 'flex', flexDirection: 'row', alignItems: 'center', gap: '10px' }}>
                             <CircularProgressWithLabel value={tweetContent.length} />
 
-                            <Button disabled={tweetContent.length === 0} variant="contained" sx={{
+                            <Button disabled={tweetContent.length === 0 || isPosting} onClick={() => handlePost()} variant="contained" sx={{
                                 mr: 1.5, backgroundColor: 'white', color: 'black',
                                 '&:hover': { backgroundColor: 'rgb(230, 230, 230)' }, padding: '8.5px', borderRadius: '25px', borderBottom: '1px solid rgb(117, 117, 117)', width: '70px',
                                 ':disabled': { backgroundColor: 'gray', color: 'black', fontWeight: 'bold' }
@@ -225,7 +259,9 @@ const ListOfTweets = () => {
                 </Box>
             </Box>
 
-            <Box sx={{ display: 'flex', flexDirection: 'column', gap: '10px', borderTop: '1px solid rgb(59, 59, 59)' }}>
+            <Box sx={{
+                display: 'flex', flexDirection: 'column',
+            }}>
                 {
                     tweets.map((tweet) => (
                         <Tweet key={tweet.id} tweet={tweet} />

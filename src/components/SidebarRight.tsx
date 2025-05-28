@@ -3,8 +3,7 @@ import { useState } from "react";
 import SuggestionBox from "./SuggestionBox";
 import { useRef } from "react";
 import { useEffect } from "react";
-import { Post } from "@/types/Post";
-import { Fragment } from "react/jsx-runtime";
+import { TrendingPost } from "@/types/TrendingPost";
 
 const SidebarRight = () => {
     const [showSuggestionBox, setShowSuggestionBox] = useState(false);
@@ -15,13 +14,13 @@ const SidebarRight = () => {
         name: 'John Doe',
         username: 'john_doe',
         description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
-        imagen: 'https://via.placeholder.com/150'
+        imagen: ''
     });
 
-    const [trendingsPosts, setTrendingsPosts] = useState<Post[]>([
-        new Post(1, 'Politics', 'Argentina', 'Boca de urna', 12200),
-        new Post(2, 'Politics', null, 'Jefe de gobierno', 4042),
-        new Post(3, 'Politics', 'Argentina', 'Pitu Salvatierra', 2980)
+    const [trendingsPosts, setTrendingsPosts] = useState<TrendingPost[]>([
+        new TrendingPost(1, 'Politics', 'Argentina', 'Boca de urna', 12200),
+        new TrendingPost(2, 'Politics', null, 'Jefe de gobierno', 4042),
+        new TrendingPost(3, 'Politics', 'Argentina', 'Pitu Salvatierra', 2980)
 
     ]);
 
@@ -46,7 +45,7 @@ const SidebarRight = () => {
     }, []);
 
     return (
-        <Stack sx={{ display: 'flex', flexDirection: 'column', alignItems: 'start', justifyContent: 'start', height: '100vh', maxWidth: '350px', gap: '20px', mt: .5 }}>
+        <Stack sx={{ position: 'fixed', ml: 135, display: 'flex', flexDirection: 'column', maxWidth: '350px', alignItems: 'start', justifyContent: 'start', height: '100vh', gap: '20px', mt: .5, width: '100%'}}>
             <Box sx={{ position: 'relative', zIndex: 1000, width: '100%' }}>
                 <TextField autoComplete="off" fullWidth ref={inputRef} onChange={(e) => setSearchQuery(e.target.value)} onClick={() => { setShowSuggestionBox(true); setIsActive(true) }} variant="outlined" placeholder="🔍︎ Search" sx={{ width: '111.8%', height: '50px', backgroundColor: 'white', border: isActive ? '3px solid #1DA1F2' : '1px solid gray', borderRadius: '999px', '& .MuiOutlinedInput-root': { height: '50px', borderRadius: '999px', fontSize: '18px', backgroundColor: 'black', color: 'white', border: 'none', position: 'relative', zIndex: 1000 } }} />
 
@@ -84,7 +83,7 @@ const SidebarRight = () => {
                         <Box key={post.id} sx={{ display: 'flex', flexDirection: 'column', alignItems: 'start', justifyContent: 'center', gap: '0px' }}>
                             <Typography variant="h6" sx={{ fontSize: '14px', color: 'gray' }}>{post.topic} {post.place ? `in ${post.place}` : '· trending'}</Typography>
                             <Typography variant="h6" sx={{ fontSize: '17px', color: 'white', fontWeight: 'bold' }}>{post.title}</Typography>
-                            <Typography variant="h6" sx={{ fontSize: '14px', color: 'gray' }}>{(post.quantity / 1000).toFixed(1)}k Posts</Typography>
+                            <Typography variant="h6" sx={{ fontSize: '14px', color: 'gray' }}>{(post.quantityPosts / 1000).toFixed(1)}k Posts</Typography>
                         </Box>
                     ))}
                 </Box>
@@ -116,7 +115,7 @@ const SidebarRight = () => {
                     <p className="separator" style={{ margin: '0 5px', whiteSpace: 'nowrap' }}>|</p>
                     <Link href='/more' sx={{ textDecoration: 'none', color: 'gray', display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'center', gap: '5px' }}>
                         <Typography variant="h6" sx={{ fontSize: '13px', whiteSpace: 'nowrap', '&:hover': { textDecoration: 'underline' } }}>More</Typography>
-                        <Typography variant="h6" sx={{ fontSize: '13px', whiteSpace: 'nowrap'}}>···</Typography>
+                        <Typography variant="h6" sx={{ fontSize: '13px', whiteSpace: 'nowrap' }}>···</Typography>
 
                     </Link>
                 </Grid>

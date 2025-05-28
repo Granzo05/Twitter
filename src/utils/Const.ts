@@ -1,0 +1,1 @@
+export const COLOR_TWITTER_BLUE = '#1DA1F2';

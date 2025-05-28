@@ -15,11 +15,11 @@ import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
 const SidebarLeft = () => {
     const username = 'Natalia Natalia';
     const userAlias = 'natalia_natalia';
-    const userLogo = 'https://via.placeholder.com/150';
+    const userLogo = '';
 
     return (
-        <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'start', justifyContent: 'start', height: '100vh', maxWidth: '450px', mt: .5 }}>
-            <span className="sidebar-section-container" style={{ padding: '15px !important' }}>
+        <Box sx={{ position: 'fixed', mr: 120, display: 'flex', flexDirection: 'column', alignItems: 'start', justifyContent: 'start', maxHeight: '100vh', maxWidth: '250px', mt: .5, width: '100%', rowGap: '9px' }}>
+            <span className="sidebar-section-container">
                 <XIcon fontSize="large" />
             </span>
 
@@ -88,7 +88,7 @@ const SidebarLeft = () => {
             <Box sx={{ display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'center', mt: 8, gap: '10px' }}>
                 <Avatar src={userLogo} />
 
-                <Box sx={{width: '100%', display: 'flex', flexDirection: 'column', alignItems: 'start', justifyContent: 'center'}}>
+                <Box sx={{ width: '100%', display: 'flex', flexDirection: 'column', alignItems: 'start', justifyContent: 'center' }}>
                     <span style={{ fontWeight: 'bold', width: '100%' }}>{username}</span>
                     <span style={{ fontSize: '12px', color: 'gray' }}>@{userAlias}</span>
                 </Box>

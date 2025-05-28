@@ -6,7 +6,7 @@ import { Fragment } from "react/jsx-runtime";
 
 const Home = () => {
     return (
-        <Box sx={{ display: 'flex', justifyContent: 'start', alignItems: 'start', height: '100vh', flexDirection: 'row', gap: '30px' }}>
+        <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'start', height: '100vh', width: '100vw', flexDirection: 'row', gap: '30px' }}>
             <SidebarLeft />
             <ListOfTweets />
             <SidebarRight />
