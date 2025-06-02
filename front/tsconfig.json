@@ -32,8 +32,8 @@
   },
   "include": [
     "src",
-    "src/components/**/*"
-  ],
+    "src/components/.tsx"
+, "StockEntrante", "jest.setup.js"  ],
   "references": [
     {
       "path": "./tsconfig.node.json"

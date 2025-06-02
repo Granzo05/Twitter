@@ -1,45 +1,11 @@
 {
-  "name": "twitter",
-  "private": true,
-  "version": "0.0.1",
-  "type": "module",
+  "name": "medical",
+  "version": "1.0.0",
   "scripts": {
-    "dev": "vite",
-    "build": "vite build",
-    "preview": "vite preview",
-    "test": "vitest"
-  },
-  "editor.codeActionsOnSave": {
-    "source.fixAll.eslint": true
-  },
-  "editor.formatOnSave": true,
-  "eslint.experimental.useFlatConfig": true,
-  "sideEffects": false,
-  "dependencies": {
-    "@emotion/styled": "^11.14.0",
-    "@mui/icons-material": "^6.4.11",
-    "@mui/material": "^6.4.11",
-    "dotenv": "^16.5.0",
-    "framer-motion": "^12.6.5",
-    "lodash": "^4.17.21",
-    "react": "^18.3.1",
-    "react-dom": "^18.3.1",
-    "react-router-dom": "^7.5.0",
-    "sonner": "^2.0.3",
-    "zustand": "^5.0.3"
+    "dev": "concurrently \"npm run dev --prefix front\" \"npm run dev --prefix back\"",
+    "build": "concurrently \"npm run build --prefix front\" \"npm run build --prefix back\""
   },
   "devDependencies": {
-    "@types/lodash": "^4.17.16",
-    "@types/node": "^22.14.1",
-    "@types/react": "^18.3.20",
-    "@types/react-dom": "^18.3.5",
-    "@typescript-eslint/eslint-plugin": "^8.29.1",
-    "@typescript-eslint/parser": "^8.29.1",
-    "@vitejs/plugin-react": "^4.3.4",
-    "eslint": "^9.24.0",
-    "eslint-plugin-react": "^7.37.5",
-    "eslint-plugin-react-refresh": "^0.4.19",
-    "typescript": "^5.8.3",
-    "vite": "^6.2.6"
+    "concurrently": "^7.0.0"
   }
 }

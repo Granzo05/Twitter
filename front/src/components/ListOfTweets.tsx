@@ -17,7 +17,7 @@ import CalendarMonthRoundedIcon from '@mui/icons-material/CalendarMonthRounded';
 import RoomOutlinedIcon from '@mui/icons-material/RoomOutlined';
 import CircularProgressWithLabel from "./CircularProgressWithLabel";
 import { User } from "@/types/User";
-import { COLOR_TWITTER_BLUE } from "@/utils/Const";
+import { BEARER_TOKEN, COLOR_TWITTER_BLUE } from "@/utils/Const";
 
 const ListOfTweets = () => {
     const [tweets, setTweets] = useState<Post[]>([
@@ -44,16 +44,30 @@ const ListOfTweets = () => {
     useEffect(() => {
         const fetchTweets = async () => {
             if (selectedTab === 'for-you') {
-                const response = await fetch('/api/tweets/for-you');
+                const response = await fetch('https://api.twitter.com/2/tweets', {
+                    method: 'POST',
+                    body: JSON.stringify({ content: tweetContent }),
+                    headers: {
+                        'Autorization': `Bearer ${BEARER_TOKEN}`,
+                    }
+                });
+                console.log(await response.json)
                 const data = await response.json();
                 setTweets(data);
             } else {
-                const response = await fetch('/api/tweets/following');
+                const response = await fetch('https://api.twitter.com/2/tweets', {
+                    method: 'POST',
+                    body: JSON.stringify({ content: tweetContent }),
+                    headers: {
+                        'Autorization': `Bearer ${BEARER_TOKEN}`
+                    }
+                });
+
                 const data = await response.json();
                 setTweets(data);
             }
         };
-        //fetchTweets();
+        fetchTweets();
     }, [selectedTab]);
 
     const handlePost = async () => {
@@ -62,7 +76,10 @@ const ListOfTweets = () => {
         try {
             const response = await fetch('/api/tweets', {
                 method: 'POST',
-                body: JSON.stringify({ content: tweetContent })
+                body: JSON.stringify({ content: tweetContent }),
+                headers: {
+                    'Autorization': `Bearer ${BEARER_TOKEN}`
+                }
             });
 
             if (response.ok) {
